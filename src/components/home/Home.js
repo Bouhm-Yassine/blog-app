@@ -1,12 +1,16 @@
 import './Home.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import BlogList from '../blog-list/BlogList';
 
 const Home = () => {
-    // const [title, setTitle] = useState('All Blogs !')
+    /* const [authorBlogs, setAuthorBlogs] = useState([])
     /* const getBlogsByAuthor = (author) => {
         return blogs.filter((item) => item.author === author)
     } */
+
+    useEffect(() => {
+        console.log("INIT");
+    }) 
 
     const [blogs, setBlogs] = useState([
         { title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1 },
@@ -22,6 +26,7 @@ const Home = () => {
     return (
         <div className="home">
             <BlogList blogs={blogs} title="All Blogs !" deleteBlog={deleteBlog}></BlogList>
+            {/* <BlogList blogs={authorBlogs} title="All Blogs !" deleteBlog={deleteBlog}></BlogList> */}
         </div>
     );
 }

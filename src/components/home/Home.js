@@ -1,5 +1,6 @@
 import './Home.css'
 import { useState } from 'react'
+import BlogList from '../blog-list/BlogList';
 
 const Home = () => {
     const [blogs, setBlogs] = useState([
@@ -10,14 +11,7 @@ const Home = () => {
 
     return (
         <div className="home">
-            {
-                blogs.map((blog) => 
-                    <div className="blog-preview" key={blog.id}>
-                        <h2>{blog.title}</h2>
-                        <p>Written by {blog.author}</p>
-                    </div>
-                )
-            }
+            <BlogList blogs={blogs}></BlogList>
         </div>
     );
 }

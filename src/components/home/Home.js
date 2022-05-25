@@ -3,15 +3,6 @@ import { useState, useEffect } from 'react'
 import BlogList from '../blog-list/BlogList';
 
 const Home = () => {
-    /* const [authorBlogs, setAuthorBlogs] = useState([])
-    /* const getBlogsByAuthor = (author) => {
-        return blogs.filter((item) => item.author === author)
-    } */
-
-    useEffect(() => {
-        console.log("INIT");
-    }) 
-
     const [blogs, setBlogs] = useState([
         { title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1 },
         { title: 'Welcome party!', body: 'lorem ipsum...', author: 'yoshi', id: 2 },
@@ -22,11 +13,16 @@ const Home = () => {
         setBlogs(blogs.filter((item) => item.id !== id))
     }
 
- 
+    useEffect(() => {
+        console.log("INIT");
+    }, []) 
+    // Add in this array, states that you want to run use effect hook if tha state changes 
+    // If the array is vide, that means the hook will be executed onece at the firs time of rendreing of the component
+
+    
     return (
         <div className="home">
             <BlogList blogs={blogs} title="All Blogs !" deleteBlog={deleteBlog}></BlogList>
-            {/* <BlogList blogs={authorBlogs} title="All Blogs !" deleteBlog={deleteBlog}></BlogList> */}
         </div>
     );
 }

@@ -3,26 +3,28 @@ import { useState, useEffect } from 'react'
 import BlogList from '../blog-list/BlogList';
 
 const Home = () => {
-    const [blogs, setBlogs] = useState([
-        { title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1 },
-        { title: 'Welcome party!', body: 'lorem ipsum...', author: 'yoshi', id: 2 },
-        { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
-    ])
+    const [blogs, setBlogs] = useState(null)
     
     const deleteBlog = (id) => {
-        setBlogs(blogs.filter((item) => item.id !== id))
+        const newBlogs = blogs.filter((item) => item.id !== id)
+        setBlogs(newBlogs)
+    }
+
+    const getBlogs = () => {
+        fetch('http://localhost:8000/blogs')
+        .then(res => res.json())
+        .then(data => setBlogs(data))
     }
 
     useEffect(() => {
         console.log("INIT");
-    }, []) 
-    // Add in this array, states that you want to run use effect hook if tha state changes 
-    // If the array is vide, that means the hook will be executed onece at the firs time of rendreing of the component
+        getBlogs()
+    }, [])
 
     
     return (
         <div className="home">
-            <BlogList blogs={blogs} title="All Blogs !" deleteBlog={deleteBlog}></BlogList>
+            {blogs && <BlogList blogs={blogs} title="All Blogs !" deleteBlog={deleteBlog}></BlogList>}
         </div>
     );
 }
